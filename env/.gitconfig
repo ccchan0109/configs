@@ -1,0 +1,39 @@
+[user]
+	name = jchan
+	email = jchan@synology.com
+[core]
+	filemode = false
+	editor = vim
+[alias]
+	ad = add -u
+	br = branch
+	cb = checkout -b
+	cm = commit
+	cma = commit --amend
+	co = checkout
+	df = diff
+	dl = difftool
+	fp = format-patch
+	la = log --graph --decorate --pretty=oneline --abbrev-commit --all
+	lg = log
+	ls = log --name-status
+	lt = log --stat
+	lf = log --follow
+	pl = pull --rebase
+	rb = rebase
+	rbc = rebase --continue
+	rbi = rebase -i
+	rs = reset
+	sh = stash
+	st = status
+	su = status -uno
+	s0 = stash apply stash@{0}
+
+[color]
+	ui = true
+	diff = auto
+	status = auto
+	branch = auto
+	log = auto
+[push]
+	default = simple
