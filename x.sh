@@ -36,7 +36,7 @@ EOF
 
 bootstrap()
 {
-	apt update || sudo apt update
+	sudo apt update
     sudo apt install -y ssh vim curl ctags cscope make tmux sed silversearcher-ag cifs-utils
 
 	curl https://raw.githubusercontent.com/Shougo/neobundle.vim/master/bin/install.sh | sh
@@ -47,6 +47,7 @@ bootstrap()
 		git clone https://github.com/magicmonty/bash-git-prompt.git ~/.bash-git-prompt
 
 		echo "source ~/.bash-git-prompt/gitprompt.sh" >> ~/.bashrc
+		source ~/.bash-git-prompt/gitprompt.sh
 	fi
 }
 
