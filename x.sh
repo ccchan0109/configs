@@ -29,7 +29,7 @@ AUTHOR:
 	James Chan - ccchan0109@gmail.com
 
 VERSION:
-	1.0.0 @ 2017/8/1
+	1.0.1 @ 2017/8/24
 
 EOF
 }
@@ -37,7 +37,7 @@ EOF
 bootstrap()
 {
 	sudo apt update
-    sudo apt install -y ssh vim curl ctags cscope make tmux sed silversearcher-ag cifs-utils
+	sudo apt install -y ssh vim curl ctags cscope make tmux sed silversearcher-ag cifs-utils
 
 	curl https://raw.githubusercontent.com/Shougo/neobundle.vim/master/bin/install.sh | sh
 
