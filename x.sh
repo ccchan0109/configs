@@ -42,13 +42,27 @@ bootstrap()
 	curl https://raw.githubusercontent.com/Shougo/neobundle.vim/master/bin/install.sh | sh
 
 	link
+	install_prompt
 
+	echo "please relogin again to apply the setting"
+}
+
+install_prompt()
+{
 	if [ ! -d ~/.bash-git-prompt ]; then
-		git clone https://github.com/magicmonty/bash-git-prompt.git ~/.bash-git-prompt
+		git clone https://github.com/magicmonty/bash-git-prompt.git ~/.bash-git-prompta
 
-		echo "source ~/.bash-git-prompt/gitprompt.sh" >> ~/.bashrc
-		source ~/.bash-git-prompt/gitprompt.sh
+		update_bahsrc
 	fi
+}
+
+update_bashrc()
+{
+	echo "source ~/.bash-git-prompt/gitprompt.sh" >> ~/.bashrc
+	echo "alias tmux='TERM=screen-256color-bce tmux'" >> ~/.bashrc
+	echo "alias tt='tmux new -s'" >> ~/.bashrc
+	echo "alias ttk='tmux kill-session -t'" >> ~/.bashrc
+	echo "alias tta='tmux attach-session -t'" >> ~/.bashrc
 }
 
 link() {
