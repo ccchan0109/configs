@@ -29,6 +29,7 @@ AUTHOR:
 	James Chan - ccchan0109@gmail.com
 
 VERSION:
+	1.0.2 @ 2019/10/8
 	1.0.1 @ 2017/8/24
 
 EOF
@@ -58,7 +59,7 @@ install_prompt()
 
 update_bashrc()
 {
-	echo "source ~/.bash-git-prompt/gitprompt.sh" >> ~/.bashrc
+	echo "source ~/.bash-git-prompta/gitprompt.sh" >> ~/.bashrc
 	echo "alias tmux='TERM=screen-256color-bce tmux'" >> ~/.bashrc
 	echo "alias tt='tmux new -s'" >> ~/.bashrc
 	echo "alias ttk='tmux kill-session -t'" >> ~/.bashrc
@@ -78,7 +79,7 @@ link() {
 }
 
 unlink() {
-	echo "Resore config files"
+	echo "Restore config files"
 
 	configs=$(find env/ -maxdepth 1 -xtype f)
 	for config in $configs; do

@@ -1,6 +1,6 @@
 [user]
-	name = ccchan0109
-	email = ccchan0109@gmail.com
+	name = jchan
+	email = jchan@synology.com
 [core]
 	filemode = false
 	editor = vim
@@ -10,8 +10,10 @@
 	cb = checkout -b
 	cm = commit
 	cma = commit --amend
+	cmc = commit --amend --author
 	co = checkout
 	df = diff
+	dfc = diff --cached
 	dl = difftool
 	fp = format-patch
 	la = log --graph --decorate --pretty=oneline --abbrev-commit --all
@@ -25,10 +27,12 @@
 	rbi = rebase -i
 	rs = reset
 	sh = stash
+	shl = stash list
 	st = status
 	su = status -uno
 	s0 = stash apply stash@{0}
 
+	ri = reset VSMediaPlayer/Modules/ux/SynoDebugWidget.cpp SvsBuildConf/NVR216.pri
 [color]
 	ui = true
 	diff = auto
