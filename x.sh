@@ -53,7 +53,7 @@ install_prompt()
 	if [ ! -d ~/.bash-git-prompt ]; then
 		git clone https://github.com/magicmonty/bash-git-prompt.git ~/.bash-git-prompta
 
-		update_bahsrc
+		update_bashrc
 	fi
 }
 
@@ -64,6 +64,9 @@ update_bashrc()
 	echo "alias tt='tmux new -s'" >> ~/.bashrc
 	echo "alias ttk='tmux kill-session -t'" >> ~/.bashrc
 	echo "alias tta='tmux attach-session -t'" >> ~/.bashrc
+	echo "alias sd='pushd > /dev/null'" >> ~/.bashrc
+	echo "alias pd='popd > /dev/null'" >> ~/.bashrc
+	echo "alias cd='sd'" >> ~/.bashrc
 }
 
 link() {
