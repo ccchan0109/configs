@@ -9,6 +9,7 @@
 LINK=no
 UNLINK=no
 BOOTSTRAP=no
+ALIAS=no
 
 #------------------------------------------------------------------------------
 #	Functions
@@ -23,6 +24,7 @@ OPTIONS:
 	-b		Bootstrap the environment with link config files
 	-l		Link config files
 	-u		Unlink (restore) config files
+	-a		Add Alias
 	-h		Show this usage
 
 AUTHOR:
@@ -60,13 +62,17 @@ install_prompt()
 update_bashrc()
 {
 	echo "source ~/.bash-git-prompta/gitprompt.sh" >> ~/.bashrc
-	echo "alias tmux='TERM=screen-256color-bce tmux'" >> ~/.bashrc
-	echo "alias tt='tmux new -s'" >> ~/.bashrc
-	echo "alias ttk='tmux kill-session -t'" >> ~/.bashrc
-	echo "alias tta='tmux attach-session -t'" >> ~/.bashrc
-	echo "alias sd='pushd > /dev/null'" >> ~/.bashrc
-	echo "alias pd='popd > /dev/null'" >> ~/.bashrc
-	echo "alias cd='sd'" >> ~/.bashrc
+}
+
+add_alias()
+{
+	echo "alias tmux='TERM=screen-256color-bce tmux'" >> ~/.bash_aliases
+	echo "alias tt='tmux new -s'" >> ~/.bash_aliases
+	echo "alias ttk='tmux kill-session -t'" >> ~/.bash_aliases
+	echo "alias tta='tmux attach-session -t'" >> ~/.bash_aliases
+	echo "alias sd='pushd > /dev/null'" >> ~/.bash_aliases
+	echo "alias pd='popd > /dev/null'" >> ~/.bash_aliases
+	echo "alias cd='sd'" >> ~/.bash_aliases
 }
 
 link() {
@@ -96,7 +102,7 @@ unlink() {
 #------------------------------------------------------------------------------
 
 Main() {
-	while getopts "hblu" OPTION
+	while getopts "hblua" OPTION
 	do
 		case $OPTION in
 			h)
@@ -112,6 +118,9 @@ Main() {
 			u)
 				UNLINK=yes
 				;;
+			a)
+				ALIAS=yes
+				;;
 			?)
 				usage
 				exit 1
@@ -125,6 +134,8 @@ Main() {
 		link
 	elif [ "$UNLINK" == "yes" ]; then
 		unlink
+	elif [ "$ALIAS" == "yes" ]; then
+		add_alias
 	else
 		usage
 	fi
