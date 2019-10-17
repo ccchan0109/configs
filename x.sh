@@ -70,6 +70,7 @@ add_alias()
 	echo "alias tt='tmux new -s'" >> ~/.bash_aliases
 	echo "alias ttk='tmux kill-session -t'" >> ~/.bash_aliases
 	echo "alias tta='tmux attach-session -t'" >> ~/.bash_aliases
+	echo "alias ttl='tmux list-sessions'" >> ~/.bash_aliases
 	echo "alias sd='pushd > /dev/null'" >> ~/.bash_aliases
 	echo "alias pd='popd > /dev/null'" >> ~/.bash_aliases
 	echo "alias cd='sd'" >> ~/.bash_aliases
