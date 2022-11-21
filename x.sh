@@ -10,6 +10,7 @@ LINK=no
 UNLINK=no
 BOOTSTRAP=no
 ALIAS=no
+GITPROMPT=no
 
 #------------------------------------------------------------------------------
 #	Functions
@@ -25,12 +26,14 @@ OPTIONS:
 	-l		Link config files
 	-u		Unlink (restore) config files
 	-a		Add Alias
+	-g		Install git-prompt for bash
 	-h		Show this usage
 
 AUTHOR:
 	James Chan - ccchan0109@gmail.com
 
 VERSION:
+	1.1.0 @ 2022/11/4
 	1.0.2 @ 2019/10/8
 	1.0.1 @ 2017/8/24
 
@@ -45,7 +48,6 @@ bootstrap()
 	curl https://raw.githubusercontent.com/Shougo/neobundle.vim/master/bin/install.sh | sh
 
 	link
-	install_prompt
 
 	echo "please relogin again to apply the setting"
 }
@@ -54,31 +56,30 @@ install_prompt()
 {
 	if [ ! -d ~/.bash-git-prompt ]; then
 		git clone https://github.com/magicmonty/bash-git-prompt.git ~/.bash-git-prompta
-
-		update_bashrc
+		echo "source ~/.bash-git-prompta/gitprompt.sh" >> ~/.bashrc
 	fi
-}
-
-update_bashrc()
-{
-	echo "source ~/.bash-git-prompta/gitprompt.sh" >> ~/.bashrc
 }
 
 add_alias()
 {
-	echo "alias tmux='TERM=screen-256color-bce tmux'" >> ~/.bash_aliases
-	echo "alias tt='tmux new -s'" >> ~/.bash_aliases
-	echo "alias ttk='tmux kill-session -t'" >> ~/.bash_aliases
-	echo "alias tta='tmux attach-session -t'" >> ~/.bash_aliases
-	echo "alias ttl='tmux list-sessions'" >> ~/.bash_aliases
-	echo "alias sd='pushd > /dev/null'" >> ~/.bash_aliases
-	echo "alias pd='popd > /dev/null'" >> ~/.bash_aliases
-	echo "alias cd='sd'" >> ~/.bash_aliases
+	if [ ! -d ~/.bash_aliases ]; then
+		echo "alias tmux='TERM=screen-256color-bce tmux'" >> ~/.bash_aliases
+		echo "alias tt='tmux new -s'" >> ~/.bash_aliases
+		echo "alias ttk='tmux kill-session -t'" >> ~/.bash_aliases
+		echo "alias tta='tmux attach-session -t'" >> ~/.bash_aliases
+		echo "alias ttl='tmux list-sessions'" >> ~/.bash_aliases
+		echo "alias sd='pushd > /dev/null'" >> ~/.bash_aliases
+		echo "alias pd='popd > /dev/null'" >> ~/.bash_aliases
+		echo "alias cd='sd'" >> ~/.bash_aliases
+		echo "alias ll='ls -al --color=auto'" >> ~/.bash_aliases
+
+		# update to .bashrc
+		echo "source ~/.bash_aliases" >> ~/.bashrc
+	fi
 }
 
 link() {
 	echo "Linking config files in env/"
-
 
 	configs=$(find env/ -maxdepth 1 -xtype f)
 	for config in $configs; do
@@ -103,7 +104,7 @@ unlink() {
 #------------------------------------------------------------------------------
 
 Main() {
-	while getopts "hblua" OPTION
+	while getopts "hbluag" OPTION
 	do
 		case $OPTION in
 			h)
@@ -122,6 +123,9 @@ Main() {
 			a)
 				ALIAS=yes
 				;;
+			g)
+				GITPROMPT=yes
+				;;
 			?)
 				usage
 				exit 1
@@ -137,6 +141,8 @@ Main() {
 		unlink
 	elif [ "$ALIAS" == "yes" ]; then
 		add_alias
+	elif [ "$GITPROMPT" == "yes" ]; then
+		install_prompt
 	else
 		usage
 	fi
