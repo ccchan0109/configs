@@ -8,8 +8,8 @@
 
 author="James Chan"
 email="ccchan0109@gmail.com"
-version="1.1.1"
-updateDate="2022/11/22"
+version="1.1.2"
+updateDate="2022/12/02"
 
 #------------------------------------------------------------------------------
 #	Parameters
@@ -26,7 +26,22 @@ CONFIGS=(
 	".tmux.conf"
 	".gitconfig"
 	".gitignore"
+	".bash_aliases"
 )
+
+#------------------------------------------------------------------------------
+#	Colors
+#------------------------------------------------------------------------------
+
+COLOR_OFF='\033[0m'
+BLACK='\033[0;30m'
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+YELLOW='\033[0;33m'
+BLUE='\033[0;34m'
+PURPLE='\033[0;35m'
+CYAN='\033[0;36m'
+WHITE='\033[0;37m'
 
 #------------------------------------------------------------------------------
 #	Functions
@@ -60,20 +75,24 @@ bootstrap()
 
 	install_vim_neobundle
 
+	install_git_prompt
+
 	link_configs
 
-	echo "don't forget to set up git user name and email"
-	echo "please relogin again to apply the setting"
+	add_alias
+
+	echo -e "don't forget to ${GREEN}set up git user name and email${COLOR_OFF}"
+	echo -e "please ${GREEN}relogin${COLOR_OFF} again to apply the setting"
 }
 
 install_dependent_packages()
 {
 	if [ "$EUID" == "0" ]; then
 		apt update
-		apt install -y ssh vim curl exuberant-ctags cscope make tmux sed silversearcher-ag cifs-utils
+		apt install -y ssh vim curl exuberant-ctags cscope make tmux sed silversearcher-ag cifs-utils git
 	else
 		sudo apt update
-		sudo apt install -y ssh vim curl exuberant-ctags cscope make tmux sed silversearcher-ag cifs-utils
+		sudo apt install -y ssh vim curl exuberant-ctags cscope make tmux sed silversearcher-ag cifs-utils git
 	fi
 }
 
@@ -86,32 +105,28 @@ install_git_prompt()
 {
 	if [ ! -d ~/.bash-git-prompt ]; then
 		git clone https://github.com/magicmonty/bash-git-prompt.git ~/.bash-git-prompta
-		echo "source ~/.bash-git-prompta/gitprompt.sh" >> ~/.bashrc
+		source_to_bashrc "~/.bash-git-prompta/gitprompt.sh"
+	fi
+}
+
+source_to_bashrc()
+{
+	local config=$1
+	cmd="source $config"
+
+	if ! grep -Fxq "$cmd" ~/.bashrc ; then
+		echo "$cmd" >> ~/.bashrc
 	fi
 }
 
 add_alias()
 {
-	if [ ! -f ~/.bash_aliases ]; then
-		echo "alias tmux='TERM=screen-256color-bce tmux'" >> ~/.bash_aliases
-		echo "alias tt='tmux new -s'" >> ~/.bash_aliases
-		echo "alias ttk='tmux kill-session -t'" >> ~/.bash_aliases
-		echo "alias tta='tmux attach-session -t'" >> ~/.bash_aliases
-		echo "alias ttl='tmux list-sessions'" >> ~/.bash_aliases
-		echo "alias sd='pushd > /dev/null'" >> ~/.bash_aliases
-		echo "alias pd='popd > /dev/null'" >> ~/.bash_aliases
-		echo "alias cd='sd'" >> ~/.bash_aliases
-		echo "alias ll='ls -al --color=auto'" >> ~/.bash_aliases
-
-		# update to .bashrc
-		echo "source ~/.bash_aliases" >> ~/.bashrc
-	else
-		echo ".bash_aliases is already existed"
-	fi
+	link ".bash_aliases"
+	source_to_bashrc "~/.bash_aliases"
 }
 
 link() {
-	config=$1
+	local config=$1
 
 	if [ -L ~/$config ] && [ -e ~/$config ]; then
 		echo "$config is already linked"
@@ -133,7 +148,7 @@ link_configs() {
 }
 
 unlink() {
-	config=$1
+	local config=$1
 
 	if [ -L ~/$config ] && [ -e ~/$config ]; then
 		rm -f ~/$config
