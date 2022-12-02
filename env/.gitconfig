@@ -2,34 +2,34 @@
 	filemode = false
 	editor = vim
 [alias]
-	ad = add -u
-	br = branch
-	cb = checkout -b
-	cm = commit
+	ad  = add -u
+	br  = branch
+	cm  = commit
 	cma = commit --amend
 	cmc = commit --amend --author
-	co = checkout
-	df = diff
+	co  = checkout
+	cb  = checkout -b
+	df  = diff
 	dfc = diff --cached
-	dl = difftool
-	fp = format-patch
-	la = log --graph --decorate --pretty=oneline --abbrev-commit --all
-	lg = log
-	ls = log --name-status
-	lt = log --stat
-	lf = log --follow
-	pl = pull --rebase
-	rb = rebase
+	dl  = difftool
+	fp  = format-patch
+	lg  = log
+	la  = log --graph --decorate --pretty=oneline --abbrev-commit --all
+	ls  = log --name-status
+	lt  = log --stat
+	lf  = log --follow
+	pl  = pull --rebase
+	rb  = rebase
 	rbc = rebase --continue
 	rbi = rebase -i
-	rs = reset
-	sh = stash
+	rs  = reset
+	st  = status
+	su  = status -uno
+	sh  = stash
 	shl = stash list
 	sha = stash apply
 	shd = stash drop
-	st = status
-	su = status -uno
-	s0 = stash apply stash@{0}
+	sh0 = stash apply stash@{0}
 [color]
 	ui = true
 	diff = auto
@@ -38,3 +38,5 @@
 	log = auto
 [push]
 	default = simple
+[user]
+	name = James Chan
