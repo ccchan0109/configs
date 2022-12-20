@@ -8,13 +8,14 @@
 
 author="James Chan"
 email="ccchan0109@gmail.com"
-version="1.1.2"
+version="1.1.3"
 updateDate="2022/12/02"
 
 #------------------------------------------------------------------------------
 #	Parameters
 #------------------------------------------------------------------------------
 
+SCRIPTNAME=${0##*/}
 LINK=no
 UNLINK=no
 BOOTSTRAP=no
@@ -50,7 +51,7 @@ WHITE='\033[0;37m'
 usage()
 {
 cat <<EOF
-usage: $0 OPTIONS [OPTARGS]
+usage: ${SCRIPTNAME} OPTIONS [OPTARGS]
 
 OPTIONS:
 	-b		Bootstrap the environment with link config files
@@ -72,6 +73,8 @@ EOF
 bootstrap()
 {
 	install_dependent_packages
+
+	install_tmux_plugin_manager
 
 	install_vim_neobundle
 
@@ -96,9 +99,18 @@ install_dependent_packages()
 	fi
 }
 
+install_tmux_plugin_manager()
+{
+	if [ ! -d ~/.tmux/plugins/tpm ]; then
+		git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+	fi
+}
+
 install_vim_neobundle()
 {
-	curl https://raw.githubusercontent.com/Shougo/neobundle.vim/master/bin/install.sh | sh
+	if [ ! -d ~/.vim/bundle/neobundle.vim ]; then
+		curl https://raw.githubusercontent.com/Shougo/neobundle.vim/master/bin/install.sh | sh
+	fi
 }
 
 install_git_prompt()
