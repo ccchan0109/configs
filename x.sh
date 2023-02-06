@@ -74,8 +74,6 @@ bootstrap()
 {
 	install_dependent_packages
 
-	install_tmux_plugin_manager
-
 	install_vim_neobundle
 
 	install_git_prompt
@@ -96,13 +94,6 @@ install_dependent_packages()
 	else
 		sudo apt update
 		sudo apt install -y ssh vim curl exuberant-ctags cscope make tmux sed silversearcher-ag cifs-utils git
-	fi
-}
-
-install_tmux_plugin_manager()
-{
-	if [ ! -d ~/.tmux/plugins/tpm ]; then
-		git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 	fi
 }
 

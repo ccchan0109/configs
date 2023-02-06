@@ -1,3 +1,7 @@
+# This is Git's per-user configuration file.
+[user]
+	name = James Chan
+	# email = your_mail
 [core]
 	filemode = false
 	editor = vim
@@ -38,5 +42,3 @@
 	log = auto
 [push]
 	default = simple
-[user]
-	name = James Chan
