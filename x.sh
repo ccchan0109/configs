@@ -8,8 +8,8 @@
 
 author="James Chan"
 email="ccchan0109@gmail.com"
-version="1.1.3"
-updateDate="2022/12/02"
+version="1.1.4"
+updateDate="2023/02/22"
 
 #------------------------------------------------------------------------------
 #	Parameters
@@ -20,7 +20,7 @@ LINK=no
 UNLINK=no
 BOOTSTRAP=no
 ALIAS=no
-GITPROMPT=no
+CUSTOM_TEST=no
 
 CONFIGS=(
 	".vimrc"
@@ -29,6 +29,10 @@ CONFIGS=(
 	".gitignore"
 	".bash_aliases"
 )
+
+PKGS=\
+"git ssh vim curl make tmux repo python3 python3-pip python3-venv \
+exuberant-ctags cscope sed silversearcher-ag cifs-utils"
 
 #------------------------------------------------------------------------------
 #	Colors
@@ -58,7 +62,7 @@ OPTIONS:
 	-l		Link config files
 	-u		Unlink (restore) config files
 	-a		Add Alias
-	-g		Install git-prompt for bash
+	-c		Run some customized code for testing
 	-h		Show this usage
 
 AUTHOR:
@@ -82,18 +86,20 @@ bootstrap()
 
 	add_alias
 
-	echo -e "don't forget to ${GREEN}set up git user name and email${COLOR_OFF}"
-	echo -e "please ${GREEN}relogin${COLOR_OFF} again to apply the setting"
+    echo -e "${YELLOW}Please do the following tasks${COLOR_OFF}"
+    echo -e "  1. Set up git user name and email"
+    echo -e "  2. Open a tmux session to trigger plugin installation"
+    echo -e "  3. Relogin to apply bash settings"
 }
 
 install_dependent_packages()
 {
 	if [ "$EUID" == "0" ]; then
 		apt update
-		apt install -y ssh vim curl exuberant-ctags cscope make tmux sed silversearcher-ag cifs-utils git
+		apt install -y $PKGS
 	else
 		sudo apt update
-		sudo apt install -y ssh vim curl exuberant-ctags cscope make tmux sed silversearcher-ag cifs-utils git
+		sudo apt install -y $PKGS
 	fi
 }
 
@@ -117,6 +123,7 @@ source_to_bashrc()
 	local config=$1
 	cmd="source $config"
 
+    # Check if the commands are already in .bashrc file
 	if ! grep -Fxq "$cmd" ~/.bashrc ; then
 		echo "$cmd" >> ~/.bashrc
 	fi
@@ -180,7 +187,7 @@ unlink_configs() {
 #------------------------------------------------------------------------------
 
 Main() {
-	while getopts "hbluag" OPTION
+	while getopts "hbluac" OPTION
 	do
 		case $OPTION in
 			h)
@@ -199,8 +206,8 @@ Main() {
 			a)
 				ALIAS=yes
 				;;
-			g)
-				GITPROMPT=yes
+			c)
+				CUSTOM_TEST=yes
 				;;
 			?)
 				usage
@@ -217,8 +224,8 @@ Main() {
 		unlink_configs
 	elif [ "$ALIAS" == "yes" ]; then
 		add_alias
-	elif [ "$GITPROMPT" == "yes" ]; then
-		install_git_prompt
+	elif [ "$CUSTOM_TEST" == "yes" ]; then
+		echo "run some test code here"
 	else
 		usage
 	fi
