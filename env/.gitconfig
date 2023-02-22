@@ -42,3 +42,9 @@
 	log = auto
 [push]
 	default = simple
+[credential]
+	helper = corpsso
+[url "persistent-http"]
+	insteadOf = http
+[url "persistent-https"]
+	insteadOf = https
