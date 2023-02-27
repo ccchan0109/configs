@@ -25,6 +25,7 @@ CUSTOM_TEST=no
 CONFIGS=(
 	".vimrc"
 	".tmux.conf"
+    ".tmux.conf.local"
 	".gitconfig"
 	".gitignore"
 	".bash_aliases"
