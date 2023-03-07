@@ -8,8 +8,8 @@
 
 author="James Chan"
 email="ccchan0109@gmail.com"
-version="1.1.4"
-updateDate="2023/02/22"
+version="1.2"
+updateDate="2023/03/07"
 
 #------------------------------------------------------------------------------
 #	Parameters
@@ -19,7 +19,6 @@ SCRIPTNAME=${0##*/}
 LINK=no
 UNLINK=no
 BOOTSTRAP=no
-ALIAS=no
 CUSTOM_TEST=no
 
 CONFIGS=(
@@ -28,8 +27,13 @@ CONFIGS=(
 	".tmux.conf.local"
 	".gitconfig"
 	".gitignore"
+)
+
+BASH_CONFIGS=(
 	".bash_aliases"
 )
+
+CONFIGS=(${CONFIGS[@]} ${BASH_CONFIGS[@]})
 
 PKGS=\
 "git ssh vim curl make tmux repo python3 python3-pip python3-venv \
@@ -62,7 +66,6 @@ OPTIONS:
 	-b		Bootstrap the environment with link config files
 	-l		Link config files
 	-u		Unlink (restore) config files
-	-a		Add Alias
 	-c		Run some customized code for testing
 	-h		Show this usage
 
@@ -85,12 +88,12 @@ bootstrap()
 
 	link_configs
 
-	add_alias
+	source_bash_configs
 
-    echo -e "${YELLOW}Please do the following tasks${COLOR_OFF}"
-    echo -e "  1. Set up git user name and email"
-    echo -e "  2. Open a tmux session to trigger plugin installation"
-    echo -e "  3. Relogin to apply bash settings"
+	echo -e "${YELLOW}Please do the following tasks${COLOR_OFF}"
+	echo -e "  1. Set up git user name and email"
+	echo -e "  2. Open a tmux session to trigger plugin installation"
+	echo -e "  3. Relogin to apply bash settings"
 }
 
 install_dependent_packages()
@@ -124,16 +127,22 @@ source_to_bashrc()
 	local config=$1
 	cmd="source $config"
 
-    # Check if the commands are already in .bashrc file
+	# Check if the commands are already in .bashrc file
 	if ! grep -Fxq "$cmd" ~/.bashrc ; then
 		echo "$cmd" >> ~/.bashrc
 	fi
 }
 
-add_alias()
+source_bash_configs()
 {
-	link ".bash_aliases"
-	source_to_bashrc "~/.bash_aliases"
+	echo "sourcing bash config files..."
+
+	for config in ${BASH_CONFIGS[@]}; do
+		# assuming config files are linked
+		source_to_bashrc "~/$config"
+	done
+
+	echo "sourcing bash config files done"
 }
 
 link() {
@@ -188,7 +197,7 @@ unlink_configs() {
 #------------------------------------------------------------------------------
 
 Main() {
-	while getopts "hbluac" OPTION
+	while getopts "hbluc" OPTION
 	do
 		case $OPTION in
 			h)
@@ -203,9 +212,6 @@ Main() {
 				;;
 			u)
 				UNLINK=yes
-				;;
-			a)
-				ALIAS=yes
 				;;
 			c)
 				CUSTOM_TEST=yes
@@ -223,8 +229,6 @@ Main() {
 		link_configs
 	elif [ "$UNLINK" == "yes" ]; then
 		unlink_configs
-	elif [ "$ALIAS" == "yes" ]; then
-		add_alias
 	elif [ "$CUSTOM_TEST" == "yes" ]; then
 		echo "run some test code here"
 	else
