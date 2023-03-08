@@ -8,14 +8,17 @@
 [alias]
 	ad  = add -u
 	br  = branch
+	ba  = branch -a
 	cm  = commit
 	cma = commit --amend
-	cmc = commit --amend --author
+	cmu = commit --amend --author
 	co  = checkout
 	cb  = checkout -b
 	df  = diff
 	dfc = diff --cached
 	dl  = difftool
+	eg  = config -e --global
+	el  = config -e --local
 	fp  = format-patch
 	lg  = log
 	la  = log --graph --decorate --pretty=oneline --abbrev-commit --all
@@ -27,6 +30,8 @@
 	rbc = rebase --continue
 	rbi = rebase -i
 	rs  = reset
+	# git remote add [remote name] [repo url]
+	rma = remote add
 	st  = status
 	su  = status -uno
 	sh  = stash
