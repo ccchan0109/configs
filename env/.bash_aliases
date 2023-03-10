@@ -9,8 +9,20 @@ alias ttl='tmux list-sessions'
 alias sd='pushd > /dev/null'
 alias pd='popd > /dev/null'
 alias cd='sd'
-alias ll='ls -al --color=auto'
+alias ls='ls --color=always'
+alias ll='ls -al'
+alias gp='grep'
+
+# source bashrc
+alias sb='source ~/.bashrc'
+
+# check disk space
+# df -hl  # check remaining disk space
+# du -sh . # check total used space for current folder
 
 # shorthand
 alias where='whereis'
 alias findname='find . -name'
+
+# git related
+alias pl='git stash; git pl; git stash pop'
