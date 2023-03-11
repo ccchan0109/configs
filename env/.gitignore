@@ -2,3 +2,5 @@
 cscope.*
 *.swp
 tags
+.vscode
+.venv

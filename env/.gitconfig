@@ -1,7 +1,7 @@
 # This is Git's per-user configuration file.
 [user]
 	name = James Chan
-	# email = your_mail
+	email = ccchan0109@gmail.com
 [core]
 	filemode = false
 	editor = vim
@@ -50,9 +50,3 @@
 	default = simple
 [clangformat]
 	style = Google
-[credential]
-	helper = corpsso
-[url "persistent-http"]
-	insteadOf = http
-[url "persistent-https"]
-	insteadOf = https
