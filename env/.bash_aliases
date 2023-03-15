@@ -22,7 +22,7 @@ alias sb='source ~/.bashrc'
 
 # shorthand
 alias where='whereis'
-alias findname='find . -name'
+alias fn='find . -name'
 
 # git related
 alias pl='git stash; git pl; git stash pop'
