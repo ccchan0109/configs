@@ -5,6 +5,7 @@
 [core]
 	filemode = false
 	editor = vim
+	excludesFile = ~/.gitignore
 [alias]
 	ad  = add -u
 	br  = branch
