@@ -395,10 +395,9 @@ bind k kill-window
 unbind ^A
 bind ^A last-window
 
-# swap window with left / right / specified index
+# swap window with left / right
 bind [ swap-window -t :-1 \; previous-window
 bind ] swap-window -t :+1 \; next-window
-bind . command-prompt -T target { swap-window -t "%%"}
 
 # create new window
 unbind C
