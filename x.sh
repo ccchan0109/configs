@@ -36,7 +36,7 @@ BASH_CONFIGS=(
 CONFIGS=(${CONFIGS[@]} ${BASH_CONFIGS[@]})
 
 PKGS=\
-"git ssh vim curl make tmux repo python3 python3-pip python3-venv \
+"git ssh vim curl make cmake gcc g++ tmux repo python3 python3-pip python3-venv \
 htop exuberant-ctags cscope sed silversearcher-ag cifs-utils"
 
 #------------------------------------------------------------------------------
