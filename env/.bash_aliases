@@ -4,6 +4,7 @@ alias tt='tmux new -s'
 alias ttk='tmux kill-session -t'
 alias tta='tmux attach-session -t'
 alias ttl='tmux list-sessions'
+alias ttlk='tmux list-keys'
 
 # basic
 alias sd='pushd > /dev/null'

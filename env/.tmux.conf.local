@@ -406,6 +406,15 @@ bind C new-window
 # unbind unnessasry keys
 unbind BSpace
 
+# complete version of list-keys
+bind ? list-keys
+
+# switch synchronize-panes on/off for typing
+bind v if-shell -Ft= "#{pane_synchronized}" "setw synchronize-panes off; display 'Panes unsynchronized'" "setw synchronize-panes on; display 'Panes synchronized'"
+
+# choose another session to switch
+bind s choose-tree -Zs
+
 # -- tpm -----------------------------------------------------------------------
 
 # while I don't use tpm myself, many people requested official support so here
