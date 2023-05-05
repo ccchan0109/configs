@@ -36,5 +36,8 @@ alias sb='source ~/.bashrc'
 # shorthand
 alias where='whereis'
 
+# to see the definition of a function
+alias def='declare -f'
+
 # git related
 alias pl='git stash; git pl; git stash pop'
