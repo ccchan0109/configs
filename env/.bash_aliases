@@ -1,3 +1,9 @@
+### TODO: Rename this file to like .bash_local
+
+###############################################################################
+##                                   Aliases                                 ##
+###############################################################################
+
 # tmux related
 alias tmux='TERM=screen-256color-bce tmux'
 alias tt='tmux new -s'
@@ -41,3 +47,21 @@ alias def='declare -f'
 
 # git related
 alias pl='git stash; git pl; git stash pop'
+
+###############################################################################
+##                                  Functions                                ##
+###############################################################################
+
+function .ps() {
+    local filter=$1
+    if [[ -z $filter ]]; then
+        ps
+    else
+        ps | grep -i $filter
+    fi
+}
+
+function .pk() {
+    local process=%1
+    pkill -f $process
+}
