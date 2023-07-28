@@ -65,3 +65,17 @@ function .pk() {
     local process=%1
     pkill -f $process
 }
+
+# infinite loop to run specified command
+function .cycle_run() {
+    local time=$1
+    # skip the 1st parameter to get followed parameters
+    shift
+    local cmd=$*
+
+    while true
+    do
+        eval $cmd
+        sleep $time
+    done
+}
