@@ -79,3 +79,9 @@ function .cycle_run() {
         sleep $time
     done
 }
+
+# mkdir with -p flag and cd to it
+function .mkdir() {
+    local path=$1
+    mkdir -p $path && cd $path
+}
