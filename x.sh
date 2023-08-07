@@ -30,7 +30,7 @@ CONFIGS=(
 )
 
 BASH_CONFIGS=(
-	".bash_aliases"
+	".bash_local"
 )
 
 CONFIGS=(${CONFIGS[@]} ${BASH_CONFIGS[@]})
