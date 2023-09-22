@@ -7,15 +7,20 @@
 	editor = vim
 	excludesFile = ~/.gitignore
 [alias]
+	aa  = add .
 	ad  = add -u
 	br  = branch
 	ba  = branch -a
+	# delete branch, -D to forcely delete
+	bd  = branch -d
 	cm  = commit
 	cma = commit --amend
 	cmu = commit --amend --author
 	co  = checkout
 	cb  = checkout -b
 	cf  = clang-format -p
+	cp  = cherry-pick
+	cpc = cherry-pick --continue
 	df  = diff
 	dfc = diff --cached
 	dl  = difftool
@@ -37,10 +42,12 @@
 	st  = status
 	su  = status -uno
 	sh  = stash
+	# if wanna record a msg, git stash push -m "msg typed here"
+	shm = stash push -m
 	shl = stash list
 	sha = stash apply
-	shd = stash drop
 	sh0 = stash apply stash@{0}
+	shd = stash drop
 [color]
 	ui = true
 	diff = auto
