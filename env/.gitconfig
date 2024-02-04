@@ -37,6 +37,9 @@
 	rbc = rebase --continue
 	rbi = rebase -i
 	rs  = reset
+	# if you want to keep the change in staged, use `git reset --soft [commit-hash]`
+	# before `reset --soft`, use `git reflog` to see the commit-hash
+	rss = reset --soft
 	# git remote add [remote name] [repo url]
 	rma = remote add
 	st  = status
