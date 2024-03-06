@@ -19,6 +19,7 @@
 	co  = checkout
 	cb  = checkout -b
 	cf  = clang-format -p
+	# git cherry-pick commit-hash
 	cp  = cherry-pick
 	cpc = cherry-pick --continue
 	df  = diff

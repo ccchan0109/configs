@@ -89,6 +89,7 @@ function .mkdir() {
 # count down seconds
 function .count_down() {
   local init_second=$1
+  local i
   for i in $(seq $init_second -1 1); do
     echo -en "\ryou have $i seconds..."
     sleep 1
