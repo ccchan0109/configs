@@ -12,7 +12,7 @@ alias tta='tmux attach-session -t'
 alias ttl='tmux list-sessions'
 alias ttlk='tmux list-keys'
 
-# basic
+# explorer
 alias sd='pushd > /dev/null'
 alias pd='popd > /dev/null'
 alias cd='sd'
@@ -95,4 +95,10 @@ function .count_down() {
     sleep 1
   done
   echo -e "\ryou have 0 seconds..."
+}
+
+# exit script even in the long stack
+function .exit() {
+    # kill itself directly
+    kill -s SIGINT $$
 }
