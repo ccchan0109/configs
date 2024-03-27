@@ -39,6 +39,9 @@ alias sb='source ~/.bashrc'
 # df -hl  # check remaining disk space
 # du -sh . # check total used space for current folder
 
+# background jobs
+alias js='jobs -l'
+
 # shorthand
 alias where='whereis'
 
