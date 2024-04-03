@@ -52,6 +52,10 @@
 	sha = stash apply
 	sh0 = stash apply stash@{0}
 	shd = stash drop
+	# git submodule add [repo url] [path to submodule folder]
+	sma = submodule add
+	# update all submodules to their latest commits
+	smu = submodule update --remote
 [color]
 	ui = true
 	diff = auto
