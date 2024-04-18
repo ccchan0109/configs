@@ -1,8 +1,6 @@
-### TODO: Rename this file to like .bash_local
-
-###############################################################################
-##                                   Aliases                                 ##
-###############################################################################
+#------------------------------------------------------------------------------
+# Aliases
+#------------------------------------------------------------------------------
 
 # tmux related
 alias tmux='TERM=screen-256color-bce tmux'
@@ -45,15 +43,30 @@ alias js='jobs -l'
 # shorthand
 alias where='whereis'
 
-# to see the definition of a function
-alias def='declare -f'
-
 # git related
 alias pl='git stash; git pl; git stash pop'
 
-###############################################################################
-##                                  Functions                                ##
-###############################################################################
+#------------------------------------------------------------------------------
+# Functions
+#------------------------------------------------------------------------------
+
+# check the function definition, alias conetent or file location
+function def() {
+    local symbol=$1
+
+    if [ -z $symbol ]; then
+        return
+    fi
+
+    local symbol_type=$(type -t $symbol)
+
+    if [ $symbol_type == "function" ]; then
+        declare -f $symbol
+    else
+        # type command can directly handle all other cases
+        type $symbol
+    fi
+}
 
 function .ps() {
     local filter=$1
@@ -92,12 +105,15 @@ function .mkdir() {
 # count down seconds
 function .count_down() {
   local init_second=$1
+  local msg=${2:-'you have'}
+  local msg_done=${3:-'time up!'}
+  local row_cleaner='\e[K'
   local i
   for i in $(seq $init_second -1 1); do
-    echo -en "\ryou have $i seconds..."
+    echo -en "$msg ${_c_tel}$i${_c_off} secs... \r"
     sleep 1
   done
-  echo -e "\ryou have 0 seconds..."
+  echo -e "\r${row_cleaner}$msg_done"
 }
 
 # exit script even in the long stack
@@ -105,3 +121,72 @@ function .exit() {
     # kill itself directly
     kill -s SIGINT $$
 }
+
+#------------------------------------------------------------------------------
+# Color Code
+#------------------------------------------------------------------------------
+
+# prefix
+# _c: foreground color
+# _b: background color
+
+# suffix
+# no suffix: light
+# _b: bright
+
+# gray
+_c_gry='\e[38;5;0m'
+_c_gry_b='\e[38;5;8m'
+
+# red
+_c_red='\e[38;5;1m'
+_c_red_b='\e[38;5;9m'
+_b_red='\e[48;5;1m'
+
+# green
+_c_grn='\e[38;5;2m'
+_c_grn_b='\e[38;5;10m'
+_b_grn='\e[48;5;2m'
+
+# yellow
+_c_yel='\e[38;5;3m'
+_c_yel_b='\e[38;5;11m'
+_b_yel='\e[48;5;3m'
+
+# blue
+_c_blu='\e[38;5;4m'
+_c_blu_b='\e[38;5;12m'
+_b_blu='\e[48;5;4m'
+
+# pink
+_c_pnk='\e[38;5;5m'
+_c_pnk_b='\e[38;5;13m'
+_b_pnk='\e[48;5;5m'
+
+# cyan
+_c_cyn='\e[38;5;6m'
+_c_cyn_b='\e[38;5;14m'
+_b_cyn='\e[48;5;6m'
+
+# white gray
+_c_wht='\e[38;5;5m'
+_c_wht_b='\e[38;5;15m'
+_b_wht='\e[48;5;5m'
+
+# orange
+_c_org='\e[38;5;172m'
+_c_org_b='\e[38;5;208m'
+_b_org='\e[48;5;172m'
+
+# purple
+_c_pur='\e[38;5;93m'
+_c_pur_b='\e[38;5;129m'
+_b_pur='\e[48;5;93m'
+
+# teal
+_c_tel='\e[38;5;36m'
+_c_tel_b='\e[38;5;49m'
+_b_tel='\e[48;5;36m'
+
+# off
+_c_off='\e[0m'
