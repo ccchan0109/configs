@@ -34,8 +34,8 @@ alias gp='grep -rn'
 alias sb='source ~/.bashrc'
 
 # check disk space
-# df -hl  # check remaining disk space
-# du -sh . # check total used space for current folder
+alias ds_all='df -hl' # check remaining disk space
+alias ds_cur='du -sh .' # check total used space for current folder
 
 # background jobs
 alias js='jobs -l'
@@ -94,6 +94,16 @@ function .cycle_run() {
         eval $cmd
         sleep $time
     done
+}
+
+# defer run specified command
+function .defer_run() {
+    local time=$1
+    # skip the 1st parameter to get followed parameters
+    shift
+    local cmd=$*
+
+    .count_down $time 'run after' && eval $cmd
 }
 
 # mkdir with -p flag and cd to it

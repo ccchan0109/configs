@@ -19,6 +19,8 @@
 	co  = checkout
 	cb  = checkout -b
 	cf  = clang-format -p
+	# remove untracked file, -f for deleting files, -f -d for deleting folders
+	cl	= clean
 	# git cherry-pick commit-hash
 	cp  = cherry-pick
 	cpc = cherry-pick --continue
