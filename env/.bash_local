@@ -51,7 +51,7 @@ alias pl='git stash; git pl; git stash pop'
 #------------------------------------------------------------------------------
 
 # check the function definition, alias conetent or file location
-function def() {
+function .def() {
     local symbol=$1
 
     if [ -z $symbol ]; then
