@@ -36,6 +36,8 @@ alias sb='source ~/.bashrc'
 # check disk space
 alias ds_all='df -hl' # check remaining disk space
 alias ds_cur='du -sh .' # check total used space for current folder
+# show the used space for each subfolders of current folder with reverse sorting
+alias ds_cur_breakdown='du -h --max-depth=1 | sort -hr'
 
 # background jobs
 alias js='jobs -l'
