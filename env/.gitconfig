@@ -38,6 +38,7 @@
 	pl  = pull --rebase
 	rb  = rebase
 	rbc = rebase --continue
+	# git rebase -i HEAD~[number of commits to rebase]
 	rbi = rebase -i
 	rs  = reset
 	# if you want to keep the change in staged, use `git reset --soft [commit-hash]`

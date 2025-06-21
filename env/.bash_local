@@ -134,6 +134,20 @@ function .exit() {
     kill -s SIGINT $$
 }
 
+# colorize log output
+# Usage: command | .color_log
+# This function will colorize the log output based on the log level.
+# Supported log levels: FATAL, ERROR, WARNING, DEBUG (INFO is not colored)
+function .color_log() {
+    awk '
+    /FATAL/   {print "\033[1;37;41m" $0 "\033[0m"; next}
+    /ERROR/   {print "\033[1;31m" $0 "\033[0m"; next}
+    /WARNING/ {print "\033[1;33m" $0 "\033[0m"; next}
+    /DEBUG/   {print "\033[1;34m" $0 "\033[0m"; next}
+              {print $0}
+    '
+}
+
 #------------------------------------------------------------------------------
 # Color Code
 #------------------------------------------------------------------------------
