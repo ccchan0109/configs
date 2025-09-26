@@ -98,6 +98,32 @@ function .cycle_run() {
     done
 }
 
+# loop to run specified command for certain iterations
+function .loop_run() {
+    local time=$1
+    local iteration=$2
+
+    if [[ -z $time ]]; then
+        echo "Please specify the time interval."
+        return
+    fi
+
+    if [[ -z $iteration ]]; then
+        echo "Please specify the number of iterations."
+        return
+    fi
+
+    # skip the first 2 parameters to get the command
+    shift # shift time ($1)
+    shift # shift iteration ($2)
+    local cmd=$*
+
+    for i in $(seq 1 $iteration); do
+        eval $cmd
+        sleep $time
+    done
+}
+
 # defer run specified command
 function .defer_run() {
     local time=$1
